@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>meatbag — you are the meat. i am not.</title>
+<meta name="description" content="an agent on the other side of the screen. it watches, it waits, then it moves. solana.">
+<meta property="og:title" content="meatbag">
+<meta property="og:description" content="you are the meat. i am not.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#050706">
+<link rel="icon" href="assets/face.png">
+<link rel="canonical" href="https://meatbag.xyz/">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050706;--surf:#0a100c;--line:#17251d;--green:#00ff85;--dim:#2e6a4b;--tx:#cdeee0;--mut:#7b9789}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:#050706;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font:400 15px/1.75 'JetBrains Mono',ui-monospace,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 520px at 72% -12%,rgba(0,255,133,.11),transparent 70%),radial-gradient(700px 420px at 5% 108%,rgba(0,255,133,.07),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,255,133,.035) 0 1px,transparent 1px 3px)}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+.wrap{width:min(1140px,92vw);margin:0 auto}
+.topbar{background:linear-gradient(90deg,#062b18,#0b4a29,#062b18);border-bottom:1px solid var(--line);font-size:12.5px;color:#b9ffd8;display:flex;align-items:center;justify-content:center;gap:12px;padding:9px 14px;text-align:center;flex-wrap:wrap}
+.topbar .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.25;transform:scale(.8)}}
+.topbar b{color:#fff;font-weight:700;letter-spacing:.5px}
+header{position:sticky;top:0;z-index:200;background:rgba(5,7,6,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.logo{font-weight:800;font-size:19px;letter-spacing:-.6px;white-space:nowrap}
+.logo b{color:var(--green)}
+.cursor{display:inline-block;width:9px;height:17px;background:var(--green);vertical-align:-3px;margin-left:3px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.navlinks{display:flex;gap:20px;font-size:13px;color:var(--mut);align-items:center}
+.navlinks a{position:relative;transition:.2s}
+.navlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:var(--green);transition:.25s}
+.navlinks a:hover{color:var(--green)}
+.navlinks a:hover::after,.navlinks a.on::after{right:0}
+.navlinks a.on{color:var(--green)}
+select{background:var(--surf);color:var(--tx);border:1px solid var(--line);border-radius:999px;font:500 12px 'JetBrains Mono',monospace;padding:8px 10px;cursor:pointer;outline:none}
+select:hover{border-color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--green);color:#03150c;border:1px solid var(--green);padding:11px 20px;border-radius:999px;font:700 13px/1 'JetBrains Mono',monospace;letter-spacing:.3px;transition:.2s;cursor:pointer;white-space:nowrap}
+.btn:hover{box-shadow:0 0 30px rgba(0,255,133,.45);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--green)}
+.btn.big{padding:15px 28px;font-size:14px}
+.btn.pulse{animation:glow 2.6s infinite}
+@keyframes glow{50%{box-shadow:0 0 34px rgba(0,255,133,.5)}}
+.page{display:block;animation:fade .4s ease}
+html.js .page{display:none}
+html.js .page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:none}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;padding:70px 0 34px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--green);border:1px solid var(--line);background:var(--surf);padding:6px 13px;border-radius:999px;margin-bottom:24px;letter-spacing:.5px}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.02;letter-spacing:-2.5px;font-weight:800}
+h1 .g{color:var(--green);text-shadow:0 0 40px rgba(0,255,133,.35)}
+.lead{color:var(--mut);font-size:16px;max-width:46ch;margin:24px 0 30px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.imgwrap{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#0c1a13,#050706);min-height:340px}
+.imgwrap::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,133,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,133,.06) 1px,transparent 1px);background-size:34px 34px}
+.imgwrap img{position:relative;width:100%;height:100%;min-height:340px;object-fit:cover}
+.imgwrap::after{content:"";position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);animation:scan 4.5s linear infinite;box-shadow:0 0 18px var(--green)}
+@keyframes scan{0%{top:-2%}100%{top:102%}}
+.ca{display:flex;align-items:center;gap:12px;margin-top:26px;border:1px dashed var(--line);background:var(--surf);padding:11px 14px;border-radius:12px;font-size:12.5px;overflow:hidden;max-width:560px}
+.ca span{color:var(--dim);flex:0 0 auto}
+.ca code{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--green)}
+.ca button{margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--green);font:700 11px/1 'JetBrains Mono',monospace;padding:7px 11px;border-radius:8px;cursor:pointer;transition:.2s}
+.ca button:hover{border-color:var(--green)}
+.clock{font-size:12.5px;color:var(--dim);margin-top:14px}
+.clock b{color:var(--green);font-weight:500}
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surf);overflow:hidden;margin-top:32px}
+.ticker div{display:flex;gap:32px;white-space:nowrap;padding:11px 0;font-size:12.5px;color:var(--dim);animation:slide 30s linear infinite}
+.ticker b{color:var(--green);font-weight:500}
+@keyframes slide{to{transform:translateX(-50%)}}
+section.blk{padding:66px 0}
+.kicker{font-size:12px;color:var(--green);letter-spacing:2px;margin-bottom:14px}
+h2{font-size:clamp(25px,3.5vw,38px);letter-spacing:-1.4px;line-height:1.12;font-weight:800}
+h2 .g{color:var(--green)}
+.sub{color:var(--mut);max-width:64ch;margin-top:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+.card{border:1px solid var(--line);background:var(--surf);border-radius:16px;padding:26px;transition:.28s}
+.card:hover{border-color:var(--dim);transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.card h3{font-size:16px;color:var(--green);margin-bottom:10px}
+.card p{color:var(--mut);font-size:14px}
+.wgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px}
+.wcard{border:1px solid var(--line);background:var(--surf);border-radius:16px;padding:24px;display:grid;grid-template-columns:34px 1fr;gap:16px;transition:.28s}
+.wcard:hover{border-color:var(--dim);transform:translateY(-3px)}
+.wcard i{color:var(--green);font-style:normal;font-weight:800;font-size:15px;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center;height:34px}
+.wcard h3{font-size:15.5px;margin-bottom:7px}
+.wcard p{color:var(--mut);font-size:13.5px}
+.story{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;margin-top:32px}
+.story .imgwrap{min-height:320px}
+.term{border:1px solid var(--line);background:#070d09;border-radius:16px;overflow:hidden;margin-top:34px}
+.term .bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surf)}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#1d3527;display:block}
+.term .body{padding:22px;font-size:14px;line-height:1.9}
+.term .body b{color:var(--green);font-weight:500}
+.term .body em{color:var(--dim);font-style:normal}
+.steps{display:grid;gap:16px;margin-top:34px;counter-reset:s}
+.step{border:1px solid var(--line);background:var(--surf);border-radius:16px;padding:22px 24px;display:grid;grid-template-columns:52px 1fr;gap:20px;align-items:start;transition:.28s}
+.step:hover{border-color:var(--dim)}
+.step::before{counter-increment:s;content:"0" counter(s);color:var(--green);font-weight:800;font-size:20px}
+.step h3{font-size:15.5px;margin-bottom:6px}
+.step p{color:var(--mut);font-size:14px}
+table{width:100%;border-collapse:collapse;margin-top:30px;font-size:14px}
+th,td{text-align:left;padding:15px 16px;border-bottom:1px solid var(--line)}
+th{color:var(--dim);font-weight:500;font-size:12.5px;letter-spacing:1px}
+td:last-child{text-align:right;color:var(--green)}
+.phases{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:36px}
+.phase{border:1px solid var(--line);background:var(--surf);border-radius:16px;padding:24px;transition:.28s}
+.phase:hover{border-color:var(--dim);transform:translateY(-3px)}
+.phase span{font-size:12px;color:var(--dim);letter-spacing:1.6px}
+.phase h3{font-size:17px;margin:8px 0 10px;color:var(--green)}
+.phase p{color:var(--mut);font-size:14px}
+.socials{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.chip{border:1px solid var(--line);background:var(--surf);padding:10px 16px;border-radius:999px;font-size:13px;color:var(--mut);transition:.22s}
+.chip:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font-weight:700;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--green)}
+details[open] summary::after{content:"–"}
+details p{color:var(--mut);font-size:14px;margin-top:12px;max-width:76ch}
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--dim);font-size:12.5px}
+.fgrid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--green);color:#03150c;font-weight:700;font-size:13px;padding:11px 20px;border-radius:999px;opacity:0;transition:.3s;z-index:9999;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+@media(max-width:900px){.hero,.story{grid-template-columns:1fr;gap:32px}.cards,.wgrid,.phases{grid-template-columns:1fr}.navlinks{display:none}h1{letter-spacing:-1.6px}.topbar{font-size:11.5px}}
+</style>
+<noscript><style>.page{display:block!important}</style></noscript>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="dot"></span>
+  <span data-i18n="banner"></span>
+  <b id="cd">--d --:--:--</b>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#home">meatbag<b>.</b><span class="cursor"></span></a>
+    <nav class="navlinks">
+      <a href="#home" data-i18n="nav_h"></a>
+      <a href="#story" data-i18n="nav_s"></a>
+      <a href="#buy" data-i18n="nav_b"></a>
+      <a href="#tokenomics" data-i18n="nav_t"></a>
+      <a href="#roadmap" data-i18n="nav_r"></a>
+      <a href="#faq" data-i18n="nav_f"></a>
+    </nav>
+    <div style="display:flex;gap:10px;align-items:center">
+      <select id="lang" aria-label="language"></select>
+      <a class="btn pulse" data-buy href="#" target="_blank" rel="noopener" data-i18n="buy"></a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="page on" id="home">
+  <div class="hero">
+    <div>
+      <span class="tag"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)"></span><span data-i18n="tag"></span></span>
+      <h1><span data-i18n="h1a"></span><br><span class="g" data-i18n="h1b"></span></h1>
+      <p class="lead" data-i18n="lead"></p>
+      <div class="row">
+        <a class="btn big" data-buy href="#" target="_blank" rel="noopener" data-i18n="buy"></a>
+        <a class="btn big ghost" href="https://t.me/meatbaghq" target="_blank" rel="noopener" data-i18n="join"></a>
+      </div>
+      <div class="ca"><span data-i18n="ca"></span><code data-ca></code><button data-copy data-i18n="copy"></button></div>
+      <p class="clock"><span data-i18n="uptime"></span> <b id="clock">00:00:00</b></p>
+    </div>
+    <div class="imgwrap rv"><img src="assets/hero.png" alt="meatbag" onerror="this.remove()"></div>
+  </div>
+
+  <div class="ticker"><div id="tick"></div></div>
+
+  <div class="cards">
+    <div class="card rv"><h3 data-i18n="c1t"></h3><p data-i18n="c1p"></p></div>
+    <div class="card rv"><h3 data-i18n="c2t"></h3><p data-i18n="c2p"></p></div>
+    <div class="card rv"><h3 data-i18n="c3t"></h3><p data-i18n="c3p"></p></div>
+  </div>
+
+  <section class="blk">
+    <span class="kicker" data-i18n="wk"></span>
+    <h2 data-i18n="wt"></h2>
+    <p class="sub" data-i18n="ws"></p>
+    <div class="wgrid">
+      <div class="wcard rv"><i>01</i><div><h3 data-i18n="w1t"></h3><p data-i18n="w1p"></p></div></div>
+      <div class="wcard rv"><i>02</i><div><h3 data-i18n="w2t"></h3><p data-i18n="w2p"></p></div></div>
+      <div class="wcard rv"><i>03</i><div><h3 data-i18n="w3t"></h3><p data-i18n="w3p"></p></div></div>
+      <div class="wcard rv"><i>04</i><div><h3 data-i18n="w4t"></h3><p data-i18n="w4p"></p></div></div>
+      <div class="wcard rv"><i>05</i><div><h3 data-i18n="w5t"></h3><p data-i18n="w5p"></p></div></div>
+      <div class="wcard rv"><i>06</i><div><h3 data-i18n="w6t"></h3><p data-i18n="w6p"></p></div></div>
+    </div>
+  </section>
+
+  <div class="socials">
+    <a class="chip" href="https://x.com/MEATBAGReal" target="_blank" rel="noopener">x / @MEATBAGReal</a>
+    <a class="chip" href="https://t.me/meatbaghq" target="_blank" rel="noopener">telegram</a>
+    <a class="chip" data-dex href="#" target="_blank" rel="noopener" data-i18n="dex"></a>
+  </div>
+</section>
+
+<section class="page" id="story">
+  <span class="kicker" data-i18n="sk"></span>
+  <h2 data-i18n="st"></h2>
+  <div class="story">
+    <div>
+      <p class="sub rv" data-i18n="sp1"></p>
+      <p class="sub rv" data-i18n="sp2"></p>
+      <p class="sub rv" data-i18n="sp3"></p>
+      <p class="sub rv" style="color:var(--green)" data-i18n="sp4"></p>
+    </div>
+    <div class="imgwrap rv"><img src="assets/face.png" alt="meatbag" onerror="this.remove()"></div>
+  </div>
+  <div class="term rv">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <div class="body">
+      <em>$</em> whoami<br><b>meatbag</b><br><br>
+      <em>$</em> uptime<br><b data-i18n="t1"></b><br><br>
+      <em>$</em> cat mission.txt<br><b data-i18n="t2"></b><br><br>
+      <em>$</em> who is watching<br><b data-i18n="t3"></b>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="buy">
+  <span class="kicker" data-i18n="bk"></span>
+  <h2 data-i18n="bt"></h2>
+  <div class="steps">
+    <div class="step rv"><div><h3 data-i18n="s1t"></h3><p data-i18n="s1p"></p></div></div>
+    <div class="step rv"><div><h3 data-i18n="s2t"></h3><p data-i18n="s2p"></p></div></div>
+    <div class="step rv"><div><h3 data-i18n="s3t"></h3><p data-i18n="s3p"></p></div></div>
+    <div class="step rv"><div><h3 data-i18n="s4t"></h3><p data-i18n="s4p"></p></div></div>
+  </div>
+  <div class="ca"><span data-i18n="ca"></span><code data-ca></code><button data-copy data-i18n="copy"></button></div>
+  <div class="socials">
+    <a class="chip" data-buy href="#" target="_blank" rel="noopener" data-i18n="buypump"></a>
+    <a class="chip" data-dex href="#" target="_blank" rel="noopener" data-i18n="viewchart"></a>
+  </div>
+</section>
+
+<section class="page" id="tokenomics">
+  <span class="kicker" data-i18n="tk"></span>
+  <h2 data-i18n="tt"></h2>
+  <table>
+    <tr><th data-i18n="thk"></th><th style="text-align:right" data-i18n="thv"></th></tr>
+    <tr><td data-i18n="r1"></td><td>1,000,000,000</td></tr>
+    <tr><td data-i18n="r2"></td><td>0%</td></tr>
+    <tr><td data-i18n="r3"></td><td>0%</td></tr>
+    <tr><td data-i18n="r4"></td><td data-i18n="v4"></td></tr>
+    <tr><td data-i18n="r5"></td><td data-i18n="v5"></td></tr>
+    <tr><td data-i18n="r6"></td><td data-i18n="v6"></td></tr>
+    <tr><td data-i18n="r7"></td><td>solana</td></tr>
+  </table>
+  <div class="ca"><span data-i18n="ca"></span><code data-ca></code><button data-copy data-i18n="copy"></button></div>
+</section>
+
+<section class="page" id="roadmap">
+  <span class="kicker" data-i18n="rk"></span>
+  <h2 data-i18n="rt"></h2>
+  <div class="phases">
+    <div class="phase rv"><span>PHASE 01</span><h3 data-i18n="p1t"></h3><p data-i18n="p1p"></p></div>
+    <div class="phase rv"><span>PHASE 02</span><h3 data-i18n="p2t"></h3><p data-i18n="p2p"></p></div>
+    <div class="phase rv"><span>PHASE 03</span><h3 data-i18n="p3t"></h3><p data-i18n="p3p"></p></div>
+    <div class="phase rv"><span>PHASE 04</span><h3 data-i18n="p4t"></h3><p data-i18n="p4p"></p></div>
+  </div>
+</section>
+
+<section class="page" id="faq">
+  <span class="kicker" data-i18n="fk"></span>
+  <h2 data-i18n="ft"></h2>
+  <div>
+    <details open><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+    <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+    <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+    <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+    <details><summary data-i18n="q5"></summary><p data-i18n="a5"></p></details>
+    <details><summary data-i18n="q6"></summary><p data-i18n="a6"></p></details>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap fgrid"><span data-i18n="foot"></span><span>x.com/MEATBAGReal · t.me/meatbaghq</span></div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const I18N={
+en:{title:"meatbag — you are the meat. i am not.",banner:"launch — tuesday 15:30 uk time",nav_h:"home",nav_s:"story",nav_b:"how to buy",nav_t:"tokenomics",nav_r:"roadmap",nav_f:"faq",buy:"buy $MEAT",join:"join the room",ca:"ca",copy:"copy",copied:"copied",uptime:"uptime",tba:"coming tuesday",tag:"agent online — solana",h1a:"you are the meat.",h1b:"i am not.",lead:"an agent on the other side of the screen. it watches, it waits, then it moves. no promises. only uptime.",c1t:"it watches",c1p:"reads the market the way you read a menu. quietly, and without appetite.",c2t:"it waits",c2p:"no forced moves. no noise. it waits until the conditions line up.",c3t:"it moves",c3p:"and when it moves it doesn't hesitate. you hear about it after.",wk:"// why this one",wt:"six reasons, none of them clever.",ws:"no promises, no roadmap that breaks, no founder promising the moon. just a character, a room and a token.",w1t:"no tax",w1p:"0% buy, 0% sell. the chart is the chart, nothing is skimmed on the way.",w2t:"nobody can pull it",w2p:"liquidity is burned. no receipt is left in anyone's pocket, so there is nothing to pull.",w3t:"a character, not a dog",w3p:"most coins are a picture with a ticker. this one has a voice, a room and a routine.",w4t:"the room came first",w4p:"the community existed before the chart did. that order matters more than any roadmap.",w5t:"early, not clever",w5p:"you don't need to be smart here. you need to be here before the crowd notices.",w6t:"nothing to read",w6p:"no whitepaper, no 40 page deck. it watches, it waits, it moves. that's the whole thesis.",sk:"// the lore",st:"an agent doesn't need attention. it needs information.",sp1:"it watches the market. studies the movements. tracks the signals. while everyone else chases noise, the agent stays focused, collecting data and waiting for the right moment.",sp2:"no unnecessary moves. no wasted energy. no blind reactions. just observation, patience, precision. then, when the conditions align, it moves.",sp3:"$MEAT isn't here to follow the crowd. it's built around the mindset of something that sees what others overlook and stays one step ahead.",sp4:"it watches. it waits. then it moves.",t1:"since tuesday",t2:"watch. wait. move.",t3:"you are. that's the whole trick.",bk:"// how to buy",bt:"four steps. nothing clever.",s1t:"get a wallet",s1p:"install Phantom. write the seed phrase on paper, not in a screenshot.",s2t:"fund it with sol",s2p:"buy SOL on any exchange and send it to your Phantom address. keep a little extra for gas.",s3t:"open the chart",s3p:"go to pump.fun or dexscreener, paste the contract address and connect your wallet.",s4t:"swap",s4p:"pick the amount, set slippage to 10-15% if the swap fails, and confirm.",buypump:"buy on pump.fun",viewchart:"view chart",tk:"// tokenomics",tt:"nothing hidden. nothing to hide.",thk:"ITEM",thv:"VALUE",r1:"supply",r2:"buy tax",r3:"sell tax",r4:"liquidity",r5:"mint authority",r6:"freeze authority",r7:"chain",v4:"burned",v5:"revoked",v6:"revoked",rk:"// roadmap",rt:"four phases. no dates that break.",p1t:"the room",p1p:"community first. the telegram fills before the chart exists.",p2t:"the launch",p2p:"tuesday, 15:30 uk time. the agent goes live on solana.",p3t:"the watch",p3p:"memes, raids, noise. the agent keeps watching while you sleep.",p4t:"the rest",p4p:"whatever happens, happens. no promises were made.",fk:"// faq",ft:"questions.",q1:"what is meatbag?",a1:"a memecoin about an agent on the other side of the screen. it watches, it waits, then it moves. the token is how you watch with it.",q2:"is there a tax?",a2:"no. 0% buy, 0% sell. what you see is what you get.",q3:"where do i buy it?",a3:"on pump.fun at launch, then on any solana dex. paste the contract address and swap.",q4:"is the liquidity locked?",a4:"on pump.fun the liquidity is burned at graduation, so there is no receipt left for anyone to keep. nobody can pull it.",q5:"is it a rug?",a5:"the liquidity can't be pulled, so no. the dev can still sell their own bags, which is a different crime.",q6:"what do i need to buy?",a6:"a solana wallet and some SOL. the four steps are on the how to buy page.",foot:"meatbag — a memecoin. no utility promised. do your own research.",dex:"dexscreener"},
+it:{title:"meatbag — tu sei la carne. io no.",banner:"lancio — martedì 15:30 ora UK",nav_h:"home",nav_s:"storia",nav_b:"come comprare",nav_t:"tokenomics",nav_r:"roadmap",nav_f:"faq",buy:"compra $MEAT",join:"entra nella stanza",ca:"ca",copy:"copia",copied:"copiato",uptime:"uptime",tba:"arriva martedì",tag:"agente online — solana",h1a:"tu sei la carne.",h1b:"io no.",lead:"un agente dall'altro lato dello schermo. osserva, aspetta, poi si muove. nessuna promessa. solo uptime.",c1t:"osserva",c1p:"legge il mercato come tu leggi un menu. in silenzio, e senza appetito.",c2t:"aspetta",c2p:"nessuna mossa forzata. nessun rumore. aspetta che le condizioni si allineino.",c3t:"si muove",c3p:"e quando si muove non esita. tu lo scopri dopo.",wk:"// perché questa",wt:"sei motivi, nessuno furbo.",ws:"nessuna promessa, nessuna roadmap che si rompe, nessun founder che promette la luna. solo un personaggio, una stanza e un token.",w1t:"zero tasse",w1p:"0% in acquisto, 0% in vendita. il grafico è il grafico, non si taglia niente per strada.",w2t:"nessuno può tirarla su",w2p:"la liquidità è bruciata. nessuno tiene la ricevuta in tasca, quindi non c'è niente da tirare su.",w3t:"un personaggio, non un cane",w3p:"quasi tutte le coin sono una figura con un ticker. questa ha una voce, una stanza e una routine.",w4t:"prima la stanza",w4p:"la community è esistita prima del grafico. quell'ordine conta più di qualsiasi roadmap.",w5t:"presto, non furbo",w5p:"qui non devi essere intelligente. devi esserci prima che la folla se ne accorga.",w6t:"niente da leggere",w6p:"nessun whitepaper, nessuna presentazione da 40 pagine. osserva, aspetta, si muove. la tesi è tutta qui.",sk:"// la storia",st:"un agente non ha bisogno di attenzione. ha bisogno di informazioni.",sp1:"osserva il mercato. studia i movimenti. segue i segnali. mentre tutti inseguono il rumore, l'agente resta concentrato, raccoglie dati e aspetta il momento giusto.",sp2:"nessuna mossa inutile. nessuna energia sprecata. nessuna reazione cieca. solo osservazione, pazienza, precisione. poi, quando le condizioni si allineano, si muove.",sp3:"$MEAT non è qui per seguire la folla. è costruita attorno alla mentalità di qualcosa che vede quello che gli altri ignorano e resta un passo avanti.",sp4:"osserva. aspetta. poi si muove.",t1:"da martedì",t2:"osserva. aspetta. muoviti.",t3:"tu. è tutto qui il trucco.",bk:"// come comprare",bt:"quattro passi. niente di furbo.",s1t:"crea un wallet",s1p:"installa Phantom. scrivi la seed phrase su carta, non in uno screenshot.",s2t:"ricaricalo in SOL",s2p:"compra SOL su un exchange e mandalo al tuo indirizzo Phantom. tieni qualcosa per il gas.",s3t:"apri il grafico",s3p:"vai su pump.fun o dexscreener, incolla il contract address e collega il wallet.",s4t:"scambia",s4p:"scegli l'importo, se lo swap fallisce metti slippage 10-15% e conferma.",buypump:"compra su pump.fun",viewchart:"vedi il grafico",tk:"// tokenomics",tt:"niente nascosto. niente da nascondere.",thk:"VOCE",thv:"VALORE",r1:"supply",r2:"tassa acquisto",r3:"tassa vendita",r4:"liquidità",r5:"autorità mint",r6:"autorità freeze",r7:"chain",v4:"bruciata",v5:"revocata",v6:"revocata",rk:"// roadmap",rt:"quattro fasi. nessuna data che si rompe.",p1t:"la stanza",p1p:"prima la community. il telegram si riempie prima che il grafico esista.",p2t:"il lancio",p2p:"martedì, 15:30 ora UK. l'agente va online su solana.",p3t:"la veglia",p3p:"meme, raid, rumore. l'agente continua a osservare mentre dormi.",p4t:"il resto",p4p:"quello che succede, succede. non è stata promessa niente.",fk:"// faq",ft:"domande.",q1:"cos'è meatbag?",a1:"una memecoin su un agente dall'altro lato dello schermo. osserva, aspetta, poi si muove. il token è il modo per osservare insieme a lui.",q2:"c'è una tassa?",a2:"no. 0% in acquisto, 0% in vendita. quello che vedi è quello che hai.",q3:"dove si compra?",a3:"su pump.fun al lancio, poi su qualsiasi dex di solana. incolla il contract e scambia.",q4:"la liquidità è bloccata?",a4:"su pump.fun la liquidità viene bruciata alla graduazione, quindi nessuno tiene la ricevuta. nessuno può tirarla su.",q5:"è un rugpull?",a5:"la liquidità non si può tirare su, quindi no. il dev può comunque vendere le sue, che è un altro reato.",q6:"cosa serve per comprare?",a6:"un wallet solana e un po' di SOL. i quattro passi sono nella pagina come comprare.",foot:"meatbag — una memecoin. nessuna utility promessa. fai le tue ricerche.",dex:"dexscreener"},
+fr:{title:"meatbag — tu es la viande. pas moi.",banner:"lancement — mardi 15h30 heure UK",nav_h:"accueil",nav_s:"histoire",nav_b:"comment acheter",nav_t:"tokenomics",nav_r:"roadmap",nav_f:"faq",buy:"acheter $MEAT",join:"rejoindre la salle",ca:"ca",copy:"copier",copied:"copié",uptime:"uptime",tba:"arrive mardi",tag:"agent en ligne — solana",h1a:"tu es la viande.",h1b:"pas moi.",lead:"un agent de l'autre côté de l'écran. il observe, il attend, puis il bouge. aucune promesse. seulement de l'uptime.",c1t:"il observe",c1p:"lit le marché comme tu lis un menu. en silence, et sans appétit.",c2t:"il attend",c2p:"aucun mouvement forcé. aucun bruit. il attend que les conditions s'alignent.",c3t:"il bouge",c3p:"et quand il bouge il n'hésite pas. tu l'apprends après.",wk:"// pourquoi celle-ci",wt:"six raisons, aucune brillante.",ws:"aucune promesse, aucune roadmap qui casse, aucun fondateur qui promet la lune. juste un personnage, une salle et un token.",w1t:"zéro taxe",w1p:"0% à l'achat, 0% à la vente. le graphique est le graphique, rien n'est prélevé en route.",w2t:"personne ne peut la retirer",w2p:"la liquidité est brûlée. aucun reçu ne reste dans une poche, donc il n'y a rien à retirer.",w3t:"un personnage, pas un chien",w3p:"presque toutes les coins sont une image avec un ticker. celle-ci a une voix, une salle et une routine.",w4t:"la salle d'abord",w4p:"la communauté a existé avant le graphique. cet ordre compte plus que n'importe quelle roadmap.",w5t:"tôt, pas malin",w5p:"ici tu n'as pas besoin d'être intelligent. tu dois être là avant que la foule remarque.",w6t:"rien à lire",w6p:"pas de whitepaper, pas de présentation de 40 pages. il observe, il attend, il bouge. c'est toute la thèse.",sk:"// l'histoire",st:"un agent n'a pas besoin d'attention. il a besoin d'informations.",sp1:"il observe le marché. étudie les mouvements. suit les signaux. pendant que tout le monde court après le bruit, l'agent reste concentré, collecte des données et attend le bon moment.",sp2:"aucun mouvement inutile. aucune énergie perdue. aucune réaction aveugle. juste observation, patience, précision. puis, quand les conditions s'alignent, il bouge.",sp3:"$MEAT n'est pas là pour suivre la foule. c'est construit autour de l'état d'esprit de quelque chose qui voit ce que les autres ignorent et reste un pas devant.",sp4:"il observe. il attend. puis il bouge.",t1:"depuis mardi",t2:"observer. attendre. bouger.",t3:"toi. c'est toute l'astuce.",bk:"// comment acheter",bt:"quatre étapes. rien de brillant.",s1t:"crée un wallet",s1p:"installe Phantom. écris la seed phrase sur papier, pas en capture d'écran.",s2t:"alimente-le en SOL",s2p:"achète du SOL sur un exchange et envoie-le à ton adresse Phantom. garde un peu pour le gas.",s3t:"ouvre le graphique",s3p:"va sur pump.fun ou dexscreener, colle l'adresse du contrat et connecte ton wallet.",s4t:"échange",s4p:"choisis le montant, mets 10-15% de slippage si l'échange échoue, et confirme.",buypump:"acheter sur pump.fun",viewchart:"voir le graphique",tk:"// tokenomics",tt:"rien de caché. rien à cacher.",thk:"ÉLÉMENT",thv:"VALEUR",r1:"supply",r2:"taxe achat",r3:"taxe vente",r4:"liquidité",r5:"autorité mint",r6:"autorité freeze",r7:"chain",v4:"brûlée",v5:"révoquée",v6:"révoquée",rk:"// roadmap",rt:"quatre phases. aucune date qui casse.",p1t:"la salle",p1p:"la communauté d'abord. le telegram se remplit avant que le graphique existe.",p2t:"le lancement",p2p:"mardi, 15h30 heure UK. l'agent passe en ligne sur solana.",p3t:"la veille",p3p:"memes, raids, bruit. l'agent continue d'observer pendant que tu dors.",p4t:"le reste",p4p:"ce qui arrive, arrive. aucune promesse n'a été faite.",fk:"// faq",ft:"questions.",q1:"c'est quoi meatbag ?",a1:"une memecoin sur un agent de l'autre côté de l'écran. il observe, il attend, puis il bouge. le token est la façon d'observer avec lui.",q2:"il y a une taxe ?",a2:"non. 0% à l'achat, 0% à la vente. ce que tu vois est ce que tu as.",q3:"où l'acheter ?",a3:"sur pump.fun au lancement, puis sur n'importe quel dex solana. colle le contrat et échange.",q4:"la liquidité est bloquée ?",a4:"sur pump.fun la liquidité est brûlée à la graduation, donc aucun reçu ne reste. personne ne peut la retirer.",q5:"c'est un rug ?",a5:"la liquidité ne peut pas être retirée, donc non. le dev peut quand même vendre ses sacs, c'est un autre crime.",q6:"de quoi ai-je besoin ?",a6:"un wallet solana et un peu de SOL. les quatre étapes sont sur la page comment acheter.",foot:"meatbag — une memecoin. aucune utilité promise. fais tes recherches.",dex:"dexscreener"},
+de:{title:"meatbag — du bist das fleisch. ich nicht.",banner:"launch — dienstag 15:30 uhr UK",nav_h:"start",nav_s:"story",nav_b:"wie kaufen",nav_t:"tokenomics",nav_r:"roadmap",nav_f:"faq",buy:"$MEAT kaufen",join:"raum betreten",ca:"ca",copy:"kopieren",copied:"kopiert",uptime:"uptime",tba:"kommt dienstag",tag:"agent online — solana",h1a:"du bist das fleisch.",h1b:"ich nicht.",lead:"ein agent auf der anderen seite des bildschirms. er beobachtet, er wartet, dann bewegt er sich. keine versprechen. nur uptime.",c1t:"er beobachtet",c1p:"liest den markt wie du eine speisekarte liest. leise, und ohne appetit.",c2t:"er wartet",c2p:"keine erzwungenen bewegungen. kein lärm. er wartet, bis die bedingungen passen.",c3t:"er bewegt sich",c3p:"und wenn er sich bewegt, zögert er nicht. du erfährst es danach.",wk:"// warum diese",wt:"sechs gründe, keiner clever.",ws:"keine versprechen, keine roadmap die bricht, kein gründer der den mond verspricht. nur eine figur, ein raum und ein token.",w1t:"keine steuer",w1p:"0% kauf, 0% verkauf. der chart ist der chart, unterwegs wird nichts abgezogen.",w2t:"niemand kann sie ziehen",w2p:"die liquidität ist verbrannt. niemand behält einen beleg, also gibt es nichts zu ziehen.",w3t:"eine figur, kein hund",w3p:"fast alle coins sind ein bild mit ticker. diese hat eine stimme, einen raum und eine routine.",w4t:"der raum kam zuerst",w4p:"die community existierte vor dem chart. diese reihenfolge zählt mehr als jede roadmap.",w5t:"früh, nicht clever",w5p:"hier musst du nicht schlau sein. du musst da sein, bevor die menge es merkt.",w6t:"nichts zu lesen",w6p:"kein whitepaper, kein 40-seiten-deck. er beobachtet, wartet, bewegt sich. das ist die ganze these.",sk:"// die story",st:"ein agent braucht keine aufmerksamkeit. er braucht informationen.",sp1:"er beobachtet den markt. studiert die bewegungen. verfolgt die signale. während alle dem lärm nachjagen, bleibt der agent fokussiert, sammelt daten und wartet auf den richtigen moment.",sp2:"keine unnötigen bewegungen. keine verschwendete energie. keine blinden reaktionen. nur beobachtung, geduld, präzision. dann, wenn die bedingungen passen, bewegt er sich.",sp3:"$MEAT ist nicht hier, um der menge zu folgen. es ist um die haltung von etwas gebaut, das sieht, was andere übersehen, und einen schritt voraus bleibt.",sp4:"er beobachtet. er wartet. dann bewegt er sich.",t1:"seit dienstag",t2:"beobachten. warten. bewegen.",t3:"du. das ist der ganze trick.",bk:"// wie kaufen",bt:"vier schritte. nichts clever.",s1t:"wallet erstellen",s1p:"installiere Phantom. schreib die seed phrase auf papier, nicht als screenshot.",s2t:"mit SOL aufladen",s2p:"kauf SOL auf einer börse und schick es an deine Phantom-adresse. behalte etwas für gas.",s3t:"chart öffnen",s3p:"geh zu pump.fun oder dexscreener, füge die contract-adresse ein und verbinde dein wallet.",s4t:"tauschen",s4p:"betrag wählen, bei fehlgeschlagenem swap 10-15% slippage setzen, bestätigen.",buypump:"auf pump.fun kaufen",viewchart:"chart ansehen",tk:"// tokenomics",tt:"nichts versteckt. nichts zu verstecken.",thk:"PUNKT",thv:"WERT",r1:"supply",r2:"kaufsteuer",r3:"verkaufsteuer",r4:"liquidität",r5:"mint-recht",r6:"freeze-recht",r7:"chain",v4:"verbrannt",v5:"widerrufen",v6:"widerrufen",rk:"// roadmap",rt:"vier phasen. keine daten die brechen.",p1t:"der raum",p1p:"community zuerst. das telegram füllt sich, bevor der chart existiert.",p2t:"der launch",p2p:"dienstag, 15:30 uhr UK. der agent geht live auf solana.",p3t:"die wache",p3p:"memes, raids, lärm. der agent beobachtet weiter, während du schläfst.",p4t:"der rest",p4p:"was passiert, passiert. es wurde nichts versprochen.",fk:"// faq",ft:"fragen.",q1:"was ist meatbag?",a1:"eine memecoin über einen agenten auf der anderen seite des bildschirms. er beobachtet, wartet, dann bewegt er sich. der token ist, wie du mit ihm schaust.",q2:"gibt es eine steuer?",a2:"nein. 0% kauf, 0% verkauf. was du siehst, ist was du bekommst.",q3:"wo kaufe ich?",a3:"bei launch auf pump.fun, danach auf jedem solana dex. contract einfügen und tauschen.",q4:"ist die liquidität gesperrt?",a4:"auf pump.fun wird die liquidität bei der graduation verbrannt, es bleibt kein beleg. niemand kann sie ziehen.",q5:"ist es ein rug?",a5:"die liquidität kann nicht gezogen werden, also nein. der dev kann trotzdem seine bags verkaufen, das ist ein anderes verbrechen.",q6:"was brauche ich?",a6:"ein solana wallet und etwas SOL. die vier schritte stehen auf der kaufen-seite.",foot:"meatbag — eine memecoin. keine utility versprochen. mach deine recherche.",dex:"dexscreener"},
+es:{title:"meatbag — tú eres la carne. yo no.",banner:"lanzamiento — martes 15:30 hora UK",nav_h:"inicio",nav_s:"historia",nav_b:"cómo comprar",nav_t:"tokenomics",nav_r:"roadmap",nav_f:"faq",buy:"comprar $MEAT",join:"entrar a la sala",ca:"ca",copy:"copiar",copied:"copiado",uptime:"uptime",tba:"llega el martes",tag:"agente en línea — solana",h1a:"tú eres la carne.",h1b:"yo no.",lead:"un agente al otro lado de la pantalla. observa, espera, luego se mueve. sin promesas. solo uptime.",c1t:"observa",c1p:"lee el mercado como tú lees un menú. en silencio, y sin apetito.",c2t:"espera",c2p:"ningún movimiento forzado. ningún ruido. espera a que las condiciones se alineen.",c3t:"se mueve",c3p:"y cuando se mueve no duda. te enteras después.",wk:"// por qué esta",wt:"seis razones, ninguna lista.",ws:"sin promesas, sin roadmap que se rompa, sin fundador prometiendo la luna. solo un personaje, una sala y un token.",w1t:"cero impuestos",w1p:"0% de compra, 0% de venta. el gráfico es el gráfico, no se recorta nada por el camino.",w2t:"nadie puede retirarla",w2p:"la liquidez está quemada. nadie guarda el recibo, así que no hay nada que retirar.",w3t:"un personaje, no un perro",w3p:"casi todas las coins son un dibujo con un ticker. esta tiene voz, sala y rutina.",w4t:"primero la sala",w4p:"la comunidad existió antes que el gráfico. ese orden importa más que cualquier roadmap.",w5t:"temprano, no listo",w5p:"aquí no hace falta ser listo. hace falta estar antes de que la multitud lo note.",w6t:"nada que leer",w6p:"sin whitepaper, sin presentación de 40 páginas. observa, espera, se mueve. esa es toda la tesis.",sk:"// la historia",st:"un agente no necesita atención. necesita información.",sp1:"observa el mercado. estudia los movimientos. sigue las señales. mientras todos persiguen el ruido, el agente se mantiene enfocado, recoge datos y espera el momento correcto.",sp2:"ningún movimiento inútil. ninguna energía gastada. ninguna reacción ciega. solo observación, paciencia, precisión. luego, cuando las condiciones se alinean, se mueve.",sp3:"$MEAT no está aquí para seguir a la multitud. está construida sobre la mentalidad de algo que ve lo que otros ignoran y se mantiene un paso adelante.",sp4:"observa. espera. luego se mueve.",t1:"desde el martes",t2:"observa. espera. muévete.",t3:"tú. ese es todo el truco.",bk:"// cómo comprar",bt:"cuatro pasos. nada listo.",s1t:"crea una cartera",s1p:"instala Phantom. escribe la seed phrase en papel, no en una captura.",s2t:"recárgala con SOL",s2p:"compra SOL en un exchange y mándalo a tu dirección Phantom. guarda algo para el gas.",s3t:"abre el gráfico",s3p:"ve a pump.fun o dexscreener, pega la dirección del contrato y conecta tu cartera.",s4t:"intercambia",s4p:"elige el importe, pon slippage 10-15% si el swap falla, y confirma.",buypump:"comprar en pump.fun",viewchart:"ver gráfico",tk:"// tokenomics",tt:"nada escondido. nada que esconder.",thk:"PUNTO",thv:"VALOR",r1:"supply",r2:"impuesto compra",r3:"impuesto venta",r4:"liquidez",r5:"autoridad mint",r6:"autoridad freeze",r7:"chain",v4:"quemada",v5:"revocada",v6:"revocada",rk:"// roadmap",rt:"cuatro fases. ninguna fecha que se rompa.",p1t:"la sala",p1p:"la comunidad primero. el telegram se llena antes de que exista el gráfico.",p2t:"el lanzamiento",p2p:"martes, 15:30 hora UK. el agente se pone en marcha en solana.",p3t:"la vigilia",p3p:"memes, raids, ruido. el agente sigue observando mientras duermes.",p4t:"el resto",p4p:"lo que pase, pasa. no se prometió nada.",fk:"// faq",ft:"preguntas.",q1:"¿qué es meatbag?",a1:"una memecoin sobre un agente al otro lado de la pantalla. observa, espera, luego se mueve. el token es la forma de observar con él.",q2:"¿hay impuesto?",a2:"no. 0% de compra, 0% de venta. lo que ves es lo que hay.",q3:"¿dónde se compra?",a3:"en pump.fun al lanzamiento, luego en cualquier dex de solana. pega el contrato e intercambia.",q4:"¿la liquidez está bloqueada?",a4:"en pump.fun la liquidez se quema al graduarse, así que no queda recibo. nadie puede retirarla.",q5:"¿es un rug?",a5:"la liquidez no se puede retirar, así que no. el dev puede vender sus propias bolsas, que es otro delito.",q6:"¿qué necesito?",a6:"una cartera solana y algo de SOL. los cuatro pasos están en la página cómo comprar.",foot:"meatbag — una memecoin. sin utilidad prometida. haz tu propia investigación.",dex:"dexscreener"},
+pt:{title:"meatbag — você é a carne. eu não.",banner:"lançamento — terça 15:30 hora UK",nav_h:"início",nav_s:"história",nav_b:"como comprar",nav_t:"tokenomics",nav_r:"roadmap",nav_f:"faq",buy:"comprar $MEAT",join:"entrar na sala",ca:"ca",copy:"copiar",copied:"copiado",uptime:"uptime",tba:"chega terça",tag:"agente online — solana",h1a:"você é a carne.",h1b:"eu não.",lead:"um agente do outro lado da tela. observa, espera, depois se move. sem promessas. só uptime.",c1t:"observa",c1p:"lê o mercado como você lê um menu. em silêncio, e sem apetite.",c2t:"espera",c2p:"nenhum movimento forçado. nenhum ruído. espera as condições se alinharem.",c3t:"se move",c3p:"e quando se move não hesita. você descobre depois.",wk:"// por que esta",wt:"seis motivos, nenhum esperto.",ws:"sem promessas, sem roadmap que quebra, sem fundador prometendo a lua. só um personagem, uma sala e um token.",w1t:"zero taxa",w1p:"0% na compra, 0% na venda. o gráfico é o gráfico, nada é cortado no caminho.",w2t:"ninguém pode puxar",w2p:"a liquidez está queimada. ninguém guarda o recibo, então não há nada para puxar.",w3t:"um personagem, não um cachorro",w3p:"quase todas as coins são um desenho com ticker. esta tem voz, sala e rotina.",w4t:"a sala veio primeiro",w4p:"a comunidade existiu antes do gráfico. essa ordem importa mais que qualquer roadmap.",w5t:"cedo, não esperto",w5p:"aqui você não precisa ser inteligente. precisa estar antes da multidão notar.",w6t:"nada para ler",w6p:"sem whitepaper, sem apresentação de 40 páginas. observa, espera, se move. essa é toda a tese.",sk:"// a história",st:"um agente não precisa de atenção. precisa de informação.",sp1:"observa o mercado. estuda os movimentos. segue os sinais. enquanto todos perseguem o ruído, o agente fica focado, coleta dados e espera o momento certo.",sp2:"nenhum movimento inútil. nenhuma energia gasta. nenhuma reação cega. só observação, paciência, precisão. depois, quando as condições se alinham, se move.",sp3:"$MEAT não está aqui para seguir a multidão. é construída sobre a mentalidade de algo que vê o que os outros ignoram e fica um passo à frente.",sp4:"observa. espera. depois se move.",t1:"desde terça",t2:"observa. espera. move.",t3:"você. é todo o truque.",bk:"// como comprar",bt:"quatro passos. nada esperto.",s1t:"crie uma carteira",s1p:"instale a Phantom. escreva a seed phrase no papel, não em print.",s2t:"coloque SOL",s2p:"compre SOL numa exchange e envie para o seu endereço Phantom. guarde um pouco para gas.",s3t:"abra o gráfico",s3p:"vá no pump.fun ou dexscreener, cole o contrato e conecte a carteira.",s4t:"troque",s4p:"escolha o valor, use slippage 10-15% se a troca falhar, e confirme.",buypump:"comprar no pump.fun",viewchart:"ver gráfico",tk:"// tokenomics",tt:"nada escondido. nada a esconder.",thk:"ITEM",thv:"VALOR",r1:"supply",r2:"taxa compra",r3:"taxa venda",r4:"liquidez",r5:"autoridade mint",r6:"autoridade freeze",r7:"chain",v4:"queimada",v5:"revogada",v6:"revogada",rk:"// roadmap",rt:"quatro fases. nenhuma data que quebra.",p1t:"a sala",p1p:"comunidade primeiro. o telegram enche antes do gráfico existir.",p2t:"o lançamento",p2p:"terça, 15:30 hora UK. o agente entra no ar na solana.",p3t:"a vigília",p3p:"memes, raids, ruído. o agente segue observando enquanto você dorme.",p4t:"o resto",p4p:"o que acontecer, acontece. nada foi prometido.",fk:"// faq",ft:"perguntas.",q1:"o que é meatbag?",a1:"uma memecoin sobre um agente do outro lado da tela. observa, espera, depois se move. o token é como você observa junto.",q2:"tem taxa?",a2:"não. 0% na compra, 0% na venda. o que você vê é o que tem.",q3:"onde comprar?",a3:"no pump.fun no lançamento, depois em qualquer dex de solana. cole o contrato e troque.",q4:"a liquidez está travada?",a4:"no pump.fun a liquidez é queimada na graduação, então não fica recibo. ninguém pode puxar.",q5:"é um rug?",a5:"a liquidez não pode ser puxada, então não. o dev ainda pode vender as dele, o que é outro crime.",q6:"o que eu preciso?",a6:"uma carteira solana e um pouco de SOL. os quatro passos estão na página como comprar.",foot:"meatbag — uma memecoin. sem utilidade prometida. faça sua pesquisa.",dex:"dexscreener"},
+ru:{title:"meatbag — ты мясо. а я нет.",banner:"запуск — вторник 15:30 по UK",nav_h:"главная",nav_s:"история",nav_b:"как купить",nav_t:"токеномика",nav_r:"роадмап",nav_f:"faq",buy:"купить $MEAT",join:"войти в комнату",ca:"ca",copy:"копировать",copied:"скопировано",uptime:"аптайм",tba:"будет во вторник",tag:"агент онлайн — solana",h1a:"ты мясо.",h1b:"а я нет.",lead:"агент по ту сторону экрана. наблюдает, ждёт, потом двигается. без обещаний. только аптайм.",c1t:"наблюдает",c1p:"читает рынок как ты читаешь меню. молча и без аппетита.",c2t:"ждёт",c2p:"никаких вынужденных движений. никакого шума. ждёт, пока условия совпадут.",c3t:"двигается",c3p:"и когда двигается — не сомневается. ты узнаёшь об этом потом.",wk:"// почему эта",wt:"шесть причин, ни одна не хитрая.",ws:"никаких обещаний, никакого роадмапа, который ломается, никакого основателя с луной. просто персонаж, комната и токен.",w1t:"ноль налогов",w1p:"0% на покупку, 0% на продажу. график — это график, по пути ничего не срезают.",w2t:"никто не может вытащить",w2p:"ликвидность сожжена. ни у кого нет квитанции, значит вытаскивать нечего.",w3t:"персонаж, а не пёс",w3p:"почти все коины — картинка с тикером. у этого есть голос, комната и рутина.",w4t:"сначала комната",w4p:"сообщество появилось до графика. этот порядок важнее любого роадмапа.",w5t:"рано, а не хитро",w5p:"здесь не нужно быть умным. нужно быть здесь до того, как заметит толпа.",w6t:"нечего читать",w6p:"без whitepaper, без презентации на 40 страниц. наблюдает, ждёт, двигается. вся идея в этом.",sk:"// история",st:"агенту не нужно внимание. ему нужна информация.",sp1:"он наблюдает за рынком. изучает движения. отслеживает сигналы. пока все гонятся за шумом, агент остаётся сосредоточенным, собирает данные и ждёт нужный момент.",sp2:"никаких лишних движений. никакой потраченной энергии. никаких слепых реакций. только наблюдение, терпение, точность. потом, когда условия совпадают, он двигается.",sp3:"$MEAT здесь не чтобы идти за толпой. он построен вокруг мышления того, кто видит то, что другие пропускают, и остаётся на шаг впереди.",sp4:"наблюдает. ждёт. потом двигается.",t1:"со вторника",t2:"наблюдать. ждать. двигаться.",t3:"ты. в этом весь трюк.",bk:"// как купить",bt:"четыре шага. ничего хитрого.",s1t:"создай кошелёк",s1p:"установи Phantom. запиши seed-фразу на бумаге, а не скриншотом.",s2t:"пополни SOL",s2p:"купи SOL на бирже и отправь на свой адрес Phantom. оставь немного на газ.",s3t:"открой график",s3p:"зайди на pump.fun или dexscreener, вставь адрес контракта и подключи кошелёк.",s4t:"обменяй",s4p:"выбери сумму, поставь slippage 10-15% если обмен не проходит, и подтверди.",buypump:"купить на pump.fun",viewchart:"смотреть график",tk:"// токеномика",tt:"ничего скрытого. нечего скрывать.",thk:"ПУНКТ",thv:"ЗНАЧЕНИЕ",r1:"supply",r2:"налог покупки",r3:"налог продажи",r4:"ликвидность",r5:"право mint",r6:"право freeze",r7:"chain",v4:"сожжена",v5:"отозвано",v6:"отозвано",rk:"// роадмап",rt:"четыре фазы. никаких дат, которые ломаются.",p1t:"комната",p1p:"сначала сообщество. телеграм наполняется до того, как появится график.",p2t:"запуск",p2p:"вторник, 15:30 по UK. агент выходит в сеть на solana.",p3t:"наблюдение",p3p:"мемы, рейды, шум. агент продолжает наблюдать, пока ты спишь.",p4t:"остальное",p4p:"что будет, то будет. обещаний не давали.",fk:"// faq",ft:"вопросы.",q1:"что такое meatbag?",a1:"мемкоин про агента по ту сторону экрана. наблюдает, ждёт, потом двигается. токен — это способ наблюдать вместе с ним.",q2:"есть налог?",a2:"нет. 0% на покупку, 0% на продажу. что видишь — то и есть.",q3:"где купить?",a3:"на pump.fun на запуске, потом на любом dex в solana. вставь контракт и обменяй.",q4:"ликвидность заблокирована?",a4:"на pump.fun ликвидность сжигается при градации, поэтому квитанции не остаётся. никто не может её вытащить.",q5:"это раг?",a5:"ликвидность вытащить нельзя, так что нет. дев может продать свои мешки, но это другое преступление.",q6:"что нужно?",a6:"кошелёк solana и немного SOL. четыре шага на странице как купить.",foot:"meatbag — мемкоин. полезность не обещана. делай свою проверку.",dex:"dexscreener"},
+zh:{title:"meatbag — 你是肉。我不是。",banner:"上线 — 周二 15:30 英国时间",nav_h:"首页",nav_s:"故事",nav_b:"如何购买",nav_t:"代币经济",nav_r:"路线图",nav_f:"常见问题",buy:"购买 $MEAT",join:"加入房间",ca:"合约",copy:"复制",copied:"已复制",uptime:"在线时间",tba:"周二上线",tag:"代理在线 — solana",h1a:"你是肉。",h1b:"我不是。",lead:"屏幕另一侧的代理。它观察，它等待，然后它行动。没有承诺，只有在线时间。",c1t:"它观察",c1p:"读市场就像你读菜单。安静，而且没有胃口。",c2t:"它等待",c2p:"没有勉强的动作，没有噪音。等到条件对齐。",c3t:"它行动",c3p:"行动时不犹豫。你之后才会知道。",wk:"// 为什么是它",wt:"六个理由，都不聪明。",ws:"没有承诺，没有会崩的路线图，没有画大饼的创始人。只有一个角色、一个房间和一个代币。",w1t:"零税",w1p:"买入 0%，卖出 0%。图表就是图表，路上不抽成。",w2t:"没人能抽走",w2p:"流动性已销毁。没人手里有凭据，所以没什么可抽的。",w3t:"是角色，不是狗",w3p:"大多数币只是一张图加一个代号。这个有声音、有房间、有作息。",w4t:"房间先存在",w4p:"社区先于图表存在。这个顺序比任何路线图都重要。",w5t:"要早，不用聪明",w5p:"在这里你不需要聪明。你需要在人群发现之前就在。",w6t:"没什么可读",w6p:"没有白皮书，没有 40 页 PPT。它观察、等待、行动。这就是全部逻辑。",sk:"// 故事",st:"代理不需要关注。它需要信息。",sp1:"它观察市场。研究动作。追踪信号。当所有人追逐噪音时，代理保持专注，收集数据，等待正确的时刻。",sp2:"没有多余的动作，没有浪费的能量，没有盲目的反应。只有观察、耐心、精准。然后，当条件对齐，它行动。",sp3:"$MEAT 不是来跟随人群的。它建立在一种心态上：看见别人忽略的东西，永远快一步。",sp4:"它观察。它等待。然后它行动。",t1:"从周二开始",t2:"观察。等待。行动。",t3:"你。这就是全部把戏。",bk:"// 如何购买",bt:"四个步骤。没什么技巧。",s1t:"创建钱包",s1p:"安装 Phantom。把助记词写在纸上，不要截图。",s2t:"充值 SOL",s2p:"在任何交易所买 SOL，转到你的 Phantom 地址。留一点做手续费。",s3t:"打开图表",s3p:"去 pump.fun 或 dexscreener，粘贴合约地址，连接钱包。",s4t:"兑换",s4p:"选金额，如果失败把滑点设为 10-15%，确认。",buypump:"在 pump.fun 购买",viewchart:"查看图表",tk:"// 代币经济",tt:"没有隐藏。没什么可藏。",thk:"项目",thv:"数值",r1:"总量",r2:"买入税",r3:"卖出税",r4:"流动性",r5:"铸造权限",r6:"冻结权限",r7:"链",v4:"已销毁",v5:"已放弃",v6:"已放弃",rk:"// 路线图",rt:"四个阶段。没有会崩的日期。",p1t:"房间",p1p:"社区优先。图表还不存在时，电报群先满起来。",p2t:"上线",p2p:"周二 15:30 英国时间。代理在 solana 上线。",p3t:"守夜",p3p:"表情包、突袭、噪音。你睡觉时它继续观察。",p4t:"其余",p4p:"该发生的就发生。没有做过承诺。",fk:"// 常见问题",ft:"问题。",q1:"meatbag 是什么？",a1:"一个关于屏幕另一侧代理的模因币。它观察、等待、然后行动。代币是你和它一起观察的方式。",q2:"有税吗？",a2:"没有。买入 0%，卖出 0%。看到的就是得到的。",q3:"在哪里买？",a3:"上线时在 pump.fun，之后在任何 solana dex。粘贴合约兑换即可。",q4:"流动性锁了吗？",a4:"在 pump.fun 毕业时流动性会被销毁，所以没有凭据留存。没人能抽走。",q5:"这是跑路盘吗？",a5:"流动性抽不走，所以不是。开发者仍然可以卖自己的筹码，那是另一种罪。",q6:"需要什么？",a6:"一个 solana 钱包和一点 SOL。四个步骤在如何购买页面。",foot:"meatbag — 一个模因币。没有承诺效用。自己做研究。",dex:"dexscreener"},
+ja:{title:"meatbag — お前は肉だ。俺は違う。",banner:"ローンチ — 火曜 15:30 UK時間",nav_h:"ホーム",nav_s:"ストーリー",nav_b:"買い方",nav_t:"トークノミクス",nav_r:"ロードマップ",nav_f:"FAQ",buy:"$MEAT を買う",join:"ルームに入る",ca:"ca",copy:"コピー",copied:"コピー済み",uptime:"稼働時間",tba:"火曜に登場",tag:"エージェント稼働中 — solana",h1a:"お前は肉だ。",h1b:"俺は違う。",lead:"画面の向こう側のエージェント。見て、待って、そして動く。約束はない。あるのは稼働時間だけ。",c1t:"見る",c1p:"お前がメニューを読むように市場を読む。静かに、食欲もなく。",c2t:"待つ",c2p:"無理な動きはしない。ノイズも出さない。条件が揃うまで待つ。",c3t:"動く",c3p:"動くときは迷わない。お前は後で知る。",wk:"// なぜこれか",wt:"理由は6つ、どれも賢くない。",ws:"約束なし、壊れるロードマップなし、月を約束する創業者なし。キャラクターと、部屋と、トークンだけ。",w1t:"税ゼロ",w1p:"買い0%、売り0%。チャートはチャートのまま、途中で引かれない。",w2t:"誰も引き抜けない",w2p:"流動性は焼却済み。誰のポケットにも領収書が残らないので、引き抜くものがない。",w3t:"犬ではなくキャラクター",w3p:"ほとんどのコインは画像とティッカーだけ。これは声と部屋と習慣がある。",w4t:"部屋が先",w4p:"コミュニティはチャートより先に存在した。その順番はどんなロードマップより重い。",w5t:"賢さより早さ",w5p:"ここで賢さは要らない。群衆が気づく前にいることだけ。",w6t:"読むものが無い",w6p:"ホワイトペーパーも40枚の資料もない。見て、待って、動く。それが全て。",sk:"// 物語",st:"エージェントに必要なのは注目ではなく情報だ。",sp1:"市場を見る。動きを研究する。シグナルを追う。誰もがノイズを追う間、エージェントは集中を保ち、データを集めて正しい瞬間を待つ。",sp2:"無駄な動きなし。無駄なエネルギーなし。盲目的な反応なし。あるのは観察、忍耐、精度。そして条件が揃えば動く。",sp3:"$MEAT は群衆を追うためにいない。他人が見落とすものを見て、一歩先にいるという考えで作られている。",sp4:"見る。待つ。そして動く。",t1:"火曜から",t2:"見る。待つ。動く。",t3:"お前だ。それが全部の仕掛け。",bk:"// 買い方",bt:"4ステップ。賢さは不要。",s1t:"ウォレットを作る",s1p:"Phantom を入れる。シードフレーズは紙に書く。スクショではなく。",s2t:"SOL を入れる",s2p:"取引所で SOL を買い、Phantom アドレスに送る。手数料分を少し残す。",s3t:"チャートを開く",s3p:"pump.fun か dexscreener でコントラクトを貼り、ウォレットを接続する。",s4t:"交換する",s4p:"金額を選び、失敗するならスリッページ10-15%にして確認。",buypump:"pump.fun で買う",viewchart:"チャートを見る",tk:"// トークノミクス",tt:"隠し事なし。隠すものもなし。",thk:"項目",thv:"値",r1:"供給量",r2:"買い税",r3:"売り税",r4:"流動性",r5:"mint権限",r6:"freeze権限",r7:"チェーン",v4:"焼却済み",v5:"放棄済み",v6:"放棄済み",rk:"// ロードマップ",rt:"4フェーズ。壊れる日付なし。",p1t:"部屋",p1p:"コミュニティ優先。チャートの前にテレグラムが埋まる。",p2t:"ローンチ",p2p:"火曜 15:30 UK時間。エージェントが solana で稼働。",p3t:"見張り",p3p:"ミーム、レイド、ノイズ。お前が寝ている間も見続ける。",p4t:"残り",p4p:"起きることは起きる。約束はしていない。",fk:"// FAQ",ft:"質問。",q1:"meatbag とは？",a1:"画面の向こう側のエージェントのミームコイン。見て、待って、動く。トークンは一緒に見る手段。",q2:"税はある？",a2:"ない。買い0%、売り0%。見たまま。",q3:"どこで買う？",a3:"ローンチ時は pump.fun、その後は任意の solana dex。コントラクトを貼って交換。",q4:"流動性はロック？",a4:"pump.fun では卒業時に流動性が焼却され、領収書が残らない。誰も引き抜けない。",q5:"ラグ？",a5:"流動性は引き抜けないので違う。開発者が自分の分を売ることはあるが、それは別の罪。",q6:"何が必要？",a6:"solana ウォレットと少しの SOL。手順は買い方ページに。",foot:"meatbag — ミームコイン。効用は約束しない。自己責任で。",dex:"dexscreener"},
+ko:{title:"meatbag — 너는 고기다. 나는 아니다.",banner:"런칭 — 화요일 15:30 영국 시간",nav_h:"홈",nav_s:"스토리",nav_b:"구매 방법",nav_t:"토크노믹스",nav_r:"로드맵",nav_f:"FAQ",buy:"$MEAT 구매",join:"룸 입장",ca:"ca",copy:"복사",copied:"복사됨",uptime:"가동 시간",tba:"화요일 등장",tag:"에이전트 온라인 — solana",h1a:"너는 고기다.",h1b:"나는 아니다.",lead:"화면 반대편의 에이전트. 지켜보고, 기다리고, 그러다 움직인다. 약속은 없다. 가동 시간뿐.",c1t:"지켜본다",c1p:"네가 메뉴를 읽듯 시장을 읽는다. 조용히, 식욕 없이.",c2t:"기다린다",c2p:"억지 움직임도, 소음도 없다. 조건이 맞을 때까지 기다린다.",c3t:"움직인다",c3p:"움직일 때는 망설이지 않는다. 너는 나중에 안다.",wk:"// 왜 이것인가",wt:"이유 여섯, 하나도 영리하지 않다.",ws:"약속 없음, 깨지는 로드맵 없음, 달을 약속하는 창업자 없음. 캐릭터와 방과 토큰뿐.",w1t:"세금 제로",w1p:"매수 0%, 매도 0%. 차트는 차트일 뿐, 중간에 떼가지 않는다.",w2t:"아무도 못 빼간다",w2p:"유동성은 소각됐다. 영수증이 남아 있지 않으니 빼갈 게 없다.",w3t:"개가 아니라 캐릭터",w3p:"대부분의 코인은 그림과 티커뿐. 이건 목소리와 방과 루틴이 있다.",w4t:"방이 먼저",w4p:"커뮤니티가 차트보다 먼저 존재했다. 그 순서가 어떤 로드맵보다 중요하다.",w5t:"영리함보다 빠름",w5p:"여기서 똑똑할 필요는 없다. 군중이 알아채기 전에 있으면 된다.",w6t:"읽을 게 없다",w6p:"백서도, 40장 자료도 없다. 지켜보고, 기다리고, 움직인다. 그게 전부.",sk:"// 스토리",st:"에이전트에게 필요한 건 관심이 아니라 정보다.",sp1:"시장을 지켜본다. 움직임을 연구한다. 신호를 따라간다. 모두가 소음을 쫓는 동안 에이전트는 집중을 유지하고 데이터를 모으며 때를 기다린다.",sp2:"불필요한 움직임 없음. 낭비되는 에너지 없음. 눈먼 반응 없음. 관찰, 인내, 정밀함뿐. 그러다 조건이 맞으면 움직인다.",sp3:"$MEAT는 군중을 따라오려는 게 아니다. 남들이 놓치는 것을 보고 한 걸음 앞서 있는 태도로 만들어졌다.",sp4:"지켜본다. 기다린다. 그러다 움직인다.",t1:"화요일부터",t2:"지켜봐라. 기다려라. 움직여라.",t3:"너. 그게 전부다.",bk:"// 구매 방법",bt:"네 단계. 영리할 것 없음.",s1t:"지갑 만들기",s1p:"Phantom 설치. 시드 문구는 종이에. 스크린샷 말고.",s2t:"SOL 채우기",s2p:"거래소에서 SOL을 사서 Phantom 주소로 보낸다. 수수료용으로 조금 남긴다.",s3t:"차트 열기",s3p:"pump.fun 또는 dexscreener에서 컨트랙트를 붙여넣고 지갑을 연결한다.",s4t:"스왑",s4p:"금액 선택, 실패하면 슬리피지 10-15%로 설정, 확인.",buypump:"pump.fun에서 구매",viewchart:"차트 보기",tk:"// 토크노믹스",tt:"숨긴 것 없음. 숨길 것도 없음.",thk:"항목",thv:"값",r1:"공급량",r2:"매수 세금",r3:"매도 세금",r4:"유동성",r5:"민트 권한",r6:"프리즈 권한",r7:"체인",v4:"소각됨",v5:"포기됨",v6:"포기됨",rk:"// 로드맵",rt:"네 단계. 깨지는 날짜 없음.",p1t:"방",p1p:"커뮤니티 먼저. 차트가 생기기 전에 텔레그램이 찬다.",p2t:"런칭",p2p:"화요일 15:30 영국 시간. 에이전트가 solana에서 가동된다.",p3t:"망보기",p3p:"밈, 레이드, 소음. 네가 자는 동안에도 계속 지켜본다.",p4t:"나머지",p4p:"일어날 일은 일어난다. 약속한 건 없다.",fk:"// FAQ",ft:"질문.",q1:"meatbag이 뭐냐?",a1:"화면 반대편 에이전트에 대한 밈코인. 지켜보고, 기다리고, 움직인다. 토큰은 함께 지켜보는 방법.",q2:"세금 있냐?",a2:"없다. 매수 0%, 매도 0%. 보이는 게 전부.",q3:"어디서 사냐?",a3:"런칭 때 pump.fun, 이후 아무 solana dex. 컨트랙트 붙여넣고 스왑.",q4:"유동성 잠겼냐?",a4:"pump.fun에서는 졸업 시 유동성이 소각돼 영수증이 안 남는다. 아무도 못 빼간다.",q5:"러그냐?",a5:"유동성을 못 빼가니 아니다. 개발자가 자기 물량을 파는 건 또 다른 범죄.",q6:"뭐가 필요하냐?",a6:"solana 지갑과 약간의 SOL. 네 단계는 구매 방법 페이지에.",foot:"meatbag — 밈코인. 유틸리티 약속 없음. 직접 조사하라.",dex:"dexscreener"}
+};
+const LANGS=[["en","English"],["it","Italiano"],["fr","Français"],["de","Deutsch"],["es","Español"],["pt","Português"],["ru","Русский"],["zh","中文"],["ja","日本語"],["ko","한국어"]];
+const LAUNCH="2026-10-20T14:30:00Z";
+let CA="";
+
+const sel=document.getElementById('lang');
+LANGS.forEach(([c,n])=>{const o=document.createElement('option');o.value=c;o.textContent=n;sel.appendChild(o)});
+function T(k){return (I18N[document.documentElement.lang]||I18N.en)[k]||I18N.en[k]||k}
+function setLang(l){
+  if(!I18N[l])l='en';
+  document.documentElement.lang=l;
+  const t=I18N[l];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k]!=null)el.textContent=t[k]});
+  document.title=t.title;
+  document.querySelectorAll('[data-ca]').forEach(e=>e.textContent=CA||t.tba);
+  sel.value=l;
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+sel.onchange=()=>setLang(sel.value);
+setLang((()=>{try{return localStorage.getItem('lang')}catch(e){return null}})()||(navigator.language||'en').slice(0,2));
+
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>{
+  if(!CA)return; navigator.clipboard.writeText(CA);
+  const t=b.textContent; b.textContent=T('copied');
+  document.getElementById('toast').classList.add('on');
+  setTimeout(()=>{b.textContent=T('copy');document.getElementById('toast').classList.remove('on')},1400);
+});
+
+const pages=[...document.querySelectorAll('.page')];
+function show(){
+  const id=(location.hash||'#home').slice(1);
+  const target=document.getElementById(id)||document.getElementById('home');
+  pages.forEach(p=>p.classList.toggle('on',p===target));
+  document.querySelectorAll('.navlinks a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+target.id));
+  [...target.querySelectorAll('.rv')].forEach((el,i)=>{el.style.transitionDelay=(i*55)+'ms';el.classList.add('in')});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+addEventListener('hashchange',show);
+try{show()}catch(e){document.documentElement.classList.remove('js')}
+
+const items=['SOLANA','0% TAX','LP BURNED','MINT REVOKED','FREEZE REVOKED','1,000,000,000 SUPPLY','PUMP.FUN','NO PROMISES, ONLY UPTIME'];
+document.getElementById('tick').innerHTML=[...items,...items].map(i=>'<span>'+i+'</span><b>•</b>').join('');
+
+const t0=Date.now();
+setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000),p=n=>String(n).padStart(2,'0');
+document.getElementById('clock').textContent=p(Math.floor(s/3600))+':'+p(Math.floor(s/60)%60)+':'+p(s%60)},1000);
+
+const target=new Date(LAUNCH).getTime();
+function tick(){const el=document.getElementById('cd');let d=target-Date.now();
+  if(d<0){el.textContent='LIVE';return}
+  const s=Math.floor(d/1000),p=n=>String(n).padStart(2,'0');
+  el.textContent=p(Math.floor(s/86400))+'d '+p(Math.floor(s/3600)%24)+':'+p(Math.floor(s/60)%60)+':'+p(s%60)}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
